@@ -1,25 +1,10 @@
 import { Button, TextField } from '@mui/material';
 import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
+import LogoOctopy from '../components/LogoOctopy.js';
 import MainContainer from '../components/MainContainer.js';
-import { ReactComponent as LogoOctopy } from '../assets/logo_solo.svg';
+
 import styled from 'styled-components';
-
-const LogoContainer = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-const FooterOctopy = styled.div`
-  position: absolute;
-  bottom: 0;
-  height: 2rem;
-  width: calc(100% - (2rem * 2));
-  background-color: #171717;
-  display: flex;
-  align-items: center;
-  padding: 0 2rem;
-`;
 
 const FormContainer = styled.div`
   display: flex;
@@ -45,9 +30,7 @@ const LoginView = () => {
 
   return (
     <MainContainer>
-      <LogoContainer>
-        <LogoOctopy/>
-      </LogoContainer>
+      <LogoOctopy />
       <FormContainer>
         <form onSubmit={handleSubmit(onSubmit)}>
           <legend>Ingrese sus datos para acceder y gestionar las acciones del robot.</legend>
@@ -78,9 +61,6 @@ const LoginView = () => {
           <Button type={'submit'} style={{ margin: '40px 0'}} fullWidth={true}>Comenzar</Button>
         </form>
       </FormContainer>
-      <FooterOctopy>
-        <span>Powered by <span>Octopy</span> 2022</span>
-      </FooterOctopy>
     </MainContainer>
   );
 };

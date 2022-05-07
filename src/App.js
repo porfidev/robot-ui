@@ -1,8 +1,10 @@
 import { Routes, Route } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import './App.css';
+import Alerted from './views/Alerted.jsx';
 import HomeView from './views/Home.jsx';
 import LoginView from './views/Login.jsx';
+import Main from './views/Main.jsx';
 
 const darkTheme = createTheme({
   palette: {
@@ -18,6 +20,8 @@ function App() {
         <Routes>
           <Route path="/" element={<HomeView/>}/>
           <Route path="/login" element={<LoginView/>}/>
+          <Route path="/alerted" element={<Alerted />} />
+          <Route path="/main" element={<Main />} />
         </Routes>
       </div>
     </ThemeProvider>
