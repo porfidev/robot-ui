@@ -10,6 +10,7 @@ const Container = styled.div`
   color: #ffffff;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 `;
 
 const FooterOctopy = styled.div`
