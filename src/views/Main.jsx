@@ -5,6 +5,7 @@ import MainContainer from "../components/MainContainer.js";
 import styled from "styled-components";
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 import AppleIcon from "@mui/icons-material/Apple";
+import QuickActionButton from '../components/QuickActionButton.js';
 
 const ShutDownButton = styled.div`
   position: absolute;
@@ -45,6 +46,7 @@ const RobotQuickActionsContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow-x: hidden;
 `;
 
 const MainMenuContainer = styled.div`
@@ -77,6 +79,13 @@ const MainContent = styled.div`
   justify-content: center;
 `;
 
+const RobotIdentificator = styled.div`
+  position: absolute;
+  left: 8rem;
+  top: 3rem;
+  font-size: 2.2rem;
+`
+
 const Main = () => {
   return (
     <MainContainer>
@@ -87,7 +96,16 @@ const Main = () => {
         <span>Apagar Robot</span>
       </ShutDownButton>
 
-      <RobotQuickActionsContainer />
+      <RobotIdentificator>
+        Robot 01
+      </RobotIdentificator>
+
+      <RobotQuickActionsContainer>
+        <QuickActionButton type={'battery'}/>
+        <QuickActionButton type={'notification'}/>
+        <QuickActionButton type={'security'}/>
+        <QuickActionButton type={'logout'} color={'#1ABFD5'}/>
+      </RobotQuickActionsContainer>
 
       <MainContent>
         <MainLegend>
