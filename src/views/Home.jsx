@@ -14,6 +14,9 @@ const HomeView = () => {
         <li>
           <Link to="/main">Main</Link>
         </li>
+        <li>
+          <Link to="/drawer">Drawer Menu</Link>
+        </li>
       </ul>
     </div>
   );
