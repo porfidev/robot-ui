@@ -5,49 +5,13 @@ import MainContainer from "../components/MainContainer.js";
 import styled from "styled-components";
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 import AppleIcon from "@mui/icons-material/Apple";
+import { MainContent } from '../components/MainContent.js';
+import { MainLegend } from '../components/MainLegend.js';
 import QuickActionButton from '../components/QuickActionButton.js';
+import { RobotIdentificator } from '../components/RobotIdentificator.js';
+import { RobotQuickActionsContainer } from '../components/RobotQuickActionsContainer.js';
+import { ShutDownButton } from '../components/ShutDownButton.js';
 
-const ShutDownButton = styled.div`
-  position: absolute;
-  background-color: #c30c3b;
-  color: #ffffff;
-  width: 6rem;
-  height: 9rem;
-  top: 2rem;
-  left: 0;
-  border-top-right-radius: 1rem;
-  border-bottom-right-radius: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-
-  span {
-    font-size: 1.2rem;
-  }
-
-  &:hover {
-    background-color: #ec124b;
-  }
-`;
-
-const RobotQuickActionsContainer = styled.div`
-  position: absolute;
-  background-color: #727272b0;
-  color: #ffffff;
-  width: 6rem;
-  min-height: 9rem;
-  top: 2rem;
-  right: 0;
-  border-top-left-radius: 1rem;
-  border-bottom-left-radius: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  overflow-x: hidden;
-`;
 
 const MainMenuContainer = styled.div`
   position: relative;
@@ -55,36 +19,6 @@ const MainMenuContainer = styled.div`
   flex-wrap: wrap;
   margin: 0 8rem;
 `;
-
-
-
-const MainLegend = styled.div`
-  h1, h2 {
-    margin: 0;
-  }
-  
-  h1 {
-    font-size: 3rem;
-  }
-  
-  h2 {
-    font-size: 1.8rem;
-  }
-`
-
-const MainContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  justify-content: center;
-`;
-
-const RobotIdentificator = styled.div`
-  position: absolute;
-  left: 8rem;
-  top: 3rem;
-  font-size: 2.2rem;
-`
 
 const Main = () => {
   return (

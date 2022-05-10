@@ -6,7 +6,8 @@ const Container = styled.div`
   margin: auto;
   width: 1366px;
   height: 1024px;
-  background-color: black;
+  background: rgb(77, 77, 77);
+  background: radial-gradient(circle, rgb(77, 77, 77) 0%, rgba(0, 0, 0, 1) 90%);
   color: #ffffff;
   display: flex;
   flex-direction: column;

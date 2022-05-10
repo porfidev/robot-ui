@@ -3,6 +3,7 @@ import { Drawer } from '@mui/material';
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import MainContainer from '../components/MainContainer.js';
 
 const notifications = [{
   dateTime: new Date().toDateString(),
@@ -47,7 +48,7 @@ const AlertContainer = styled.div`
 
 const DrawerMenu = props => {
   return (
-    <div>
+    <MainContainer>
       <Drawer
         anchor={'right'}
         open={true}
@@ -78,7 +79,7 @@ const DrawerMenu = props => {
           }
         </NotificationsContainer>
       </Drawer>
-    </div>
+    </MainContainer>
   );
 };
 

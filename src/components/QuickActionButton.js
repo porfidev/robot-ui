@@ -5,6 +5,7 @@ import KeyIcon from '@mui/icons-material/Key';
 import styled from 'styled-components';
 import LogoutIcon from '@mui/icons-material/Logout';
 import BatteryCharging90Icon from '@mui/icons-material/BatteryCharging90';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const switchTypeIcon = (type) => {
   const iconStyle = { fontSize: 60 };
@@ -17,6 +18,8 @@ const switchTypeIcon = (type) => {
       return <LogoutIcon sx={iconStyle} />
     case 'battery':
       return <BatteryCharging90Icon sx={iconStyle} />
+    case 'back':
+      return <ArrowBackIcon sx={iconStyle} />
   }
 }
 
