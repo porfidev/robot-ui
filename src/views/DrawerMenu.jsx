@@ -1,20 +1,9 @@
 import { Close } from '@mui/icons-material';
 import { Drawer } from '@mui/material';
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import Alert from '../components/Alert.js';
 import MainContainer from '../components/MainContainer.js';
-
-const notifications = [{
-  dateTime: new Date().toDateString(),
-  message: '¿Me he topado con un obstáculo que no logro evadir, que desea hacer?'
-}, {
-  dateTime: new Date().toDateString(),
-  message: 'Una persona esta respondiendo una encuesta en este momento'
-}, {
-  dateTime: new Date().toDateString(),
-  message: 'Robot, No presionaron botón de pedido recibido'
-}];
 
 const CloseDrawerButton = styled.div`
   display: flex;
@@ -31,22 +20,30 @@ const CloseDrawerButton = styled.div`
 `;
 
 const NotificationsContainer = styled.div`
-  background-color: lightgray;
   display: flex;
   flex-direction: column;
-  width: 28rem;
+  width: 25rem;
+  padding: 0.5rem 1rem;
+
+  h1 {
+    font-size: 1.8rem;
+    color: #2AA4D5;
+    margin: 0 0 1rem;
+  }
 `;
 
-const AlertContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: #FFF;
-  margin: 1rem;
-  color: #000;
-  border-radius: 1rem;
-`;
+const notifications = [{
+  dateTime: '10:11',
+  message: '¿Me he topado con un obstáculo que no logro evadir, que desea hacer?'
+}, {
+  dateTime: '12:25',
+  message: 'Una persona esta respondiendo una encuesta en este momento'
+}, {
+  dateTime: '13:40',
+  message: 'Robot, No presionaron botón de pedido recibido'
+}];
 
-const DrawerMenu = props => {
+const DrawerMenu = () => {
   return (
     <MainContainer>
       <Drawer
@@ -58,23 +55,10 @@ const DrawerMenu = props => {
           <CloseDrawerButton>
             <Close sx={{color: '#FFFFFF', fontSize: 50}}/>
           </CloseDrawerButton>
-          <h2>Alertas</h2>
+          <h1>Alertas</h1>
           {
-            notifications.map((noti) => {
-              return <AlertContainer>
-                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
-                  <div style={{ marginLeft: '1rem', marginTop: '1rem'}}>
-                    {noti.dateTime}
-                  </div>
-                  <CloseDrawerButton>
-                    <Close sx={{color: '#000000', fontSize: 30}}/>
-                  </CloseDrawerButton>
-                </div>
-
-                <div style={{
-                  padding: '1rem 2rem'
-                }}>{noti.message}</div>
-              </AlertContainer>;
+            notifications.map((notification) => {
+              return <Alert {...notification} />;
             })
           }
         </NotificationsContainer>
@@ -82,7 +66,5 @@ const DrawerMenu = props => {
     </MainContainer>
   );
 };
-
-DrawerMenu.propTypes = {};
 
 export default DrawerMenu;
