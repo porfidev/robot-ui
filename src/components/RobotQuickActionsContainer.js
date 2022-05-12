@@ -4,8 +4,8 @@ const RobotQuickActionsContainer = styled.div`
   position: absolute;
   background-color: #727272b0;
   color: #ffffff;
-  width: 6rem;
-  min-height: 9rem;
+  width: 5rem;
+  min-height: 6rem;
   top: 2rem;
   right: 0;
   border-top-left-radius: 1rem;

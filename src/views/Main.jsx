@@ -17,7 +17,8 @@ const MainMenuContainer = styled.div`
   position: relative;
   display: flex;
   flex-wrap: wrap;
-  margin: 0 8rem;
+  margin: 0 5rem;
+  flex: 1;
 `;
 
 const Main = () => {
@@ -31,7 +32,7 @@ const Main = () => {
       </ShutDownButton>
 
       <RobotIdentificator>
-        Robot 01
+         Robot 01
       </RobotIdentificator>
 
       <RobotQuickActionsContainer>

@@ -24,8 +24,8 @@ const switchTypeIcon = (type) => {
 }
 
 const ActionButtonContainer = styled.div`
-  width: 6rem;
-  height: 6rem;
+  width: 5rem;
+  height: 5rem;
   background-color: ${({color}) => color ? color: 'gray'};
   display: flex;
   justify-content: center;

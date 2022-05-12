@@ -2,9 +2,9 @@ import styled, { css } from 'styled-components';
 
 const ActionButton = styled.div`
   position: relative;
-  flex: 1 0 15%; /* explanation below */
-  margin: 2rem;
-  height: 11rem;
+  flex: 1 0 20%; /* explanation below */
+  margin: 1.4rem;
+  height: 10rem;
   background-color: ${({ enabled }) => enabled ? '#2aa4d5' : 'gray'};
   border-radius: 1.2rem;
   cursor: ${({ enabled }) => enabled ? 'pointer' : 'not-allowed'};
@@ -19,7 +19,7 @@ const ActionButton = styled.div`
 
   span {
     margin-top: 1rem;
-    font-size: 1.8rem;
+    font-size: 1.2rem;
     font-weight: bold;
     text-transform: uppercase;
   }
