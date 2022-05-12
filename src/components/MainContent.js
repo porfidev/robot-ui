@@ -5,6 +5,7 @@ const MainContent = styled.div`
   flex-direction: column;
   flex: 1;
   justify-content: center;
+  margin-top: 4rem;
 `;
 
 export { MainContent }

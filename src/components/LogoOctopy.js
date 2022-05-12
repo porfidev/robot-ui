@@ -4,12 +4,13 @@ import { ReactComponent as LogoOctopyImage } from "../assets/logo_solo.svg";
 
 const LogoContainer = styled.div`
   display: flex;
+  align-items: flex-start;
   justify-content: center;
 `;
 
 const LogoOctopy = () => (
   <LogoContainer>
-    <LogoOctopyImage />
+    <LogoOctopyImage height={80}/>
   </LogoContainer>
 );
 

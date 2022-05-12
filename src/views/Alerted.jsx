@@ -19,8 +19,8 @@ const AlertContainer = styled.div`
   backdrop-filter: blur(2px);
   position: absolute;
   background-color: rgba(0, 0, 0, 0.5);
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 90vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -32,8 +32,8 @@ const Alert = styled.div`
   width: 40rem;
   min-height: 10rem;
   color: #fff;
-  padding: 2rem;
-  border-radius: 2rem;
+  padding: 1.2rem;
+  border-radius: 1.6rem;
   flex-direction: column;
 
   p {

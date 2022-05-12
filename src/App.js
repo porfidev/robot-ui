@@ -18,7 +18,6 @@ function App() {
   return (
     <ThemeProvider theme={darkTheme}>
       <div className="App">
-        <h1>React Octopy Robot Navigation</h1>
         <Routes>
           <Route path="/" element={<HomeView/>}/>
           <Route path="/login" element={<LoginView/>}/>

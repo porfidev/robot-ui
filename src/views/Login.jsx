@@ -5,16 +5,25 @@ import LogoOctopy from '../components/LogoOctopy.js';
 import MainContainer from '../components/MainContainer.js';
 
 import styled from 'styled-components';
+import { MainContent } from '../components/MainContent.js';
+import { MainLegend } from '../components/MainLegend.js';
 
 const FormContainer = styled.div`
   display: flex;
-  margin: 4rem auto;
+  flex-direction: column;
+  align-items: center;
   flex: 1;
-  max-width: 676px;
+`;
 
-  legend {
-    font-size: 2rem;
-  }
+const FormButton = styled.button`
+  background: #FFFFFF;
+  border: 2px solid #000000;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: 0.8rem 2rem;
+  border-radius: 0.5rem;
+  color: #000;
 `;
 
 const LoginView = () => {
@@ -24,6 +33,7 @@ const LoginView = () => {
       password: ''
     }
   });
+
   const onSubmit = data => {
     console.log('onSubmit', data);
   };
@@ -31,9 +41,14 @@ const LoginView = () => {
   return (
     <MainContainer>
       <LogoOctopy />
-      <FormContainer>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <legend>Ingrese sus datos para acceder y gestionar las acciones del robot.</legend>
+
+      <MainContent>
+        <MainLegend>
+          <h2>Ingrese sus datos para acceder y gestionar las acciones del robot.</h2>
+        </MainLegend>
+
+        <FormContainer>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <Controller
               render={
                 ({field, fieldState: {error}}) =>
@@ -58,9 +73,10 @@ const LoginView = () => {
               rules={{required: 'Se requiere la contraseña'}}
             />
 
-          <Button type={'submit'} style={{ margin: '40px 0'}} fullWidth={true}>Comenzar</Button>
-        </form>
-      </FormContainer>
+            <FormButton>Comenzar</FormButton>
+          </form>
+        </FormContainer>
+      </MainContent>
     </MainContainer>
   );
 };

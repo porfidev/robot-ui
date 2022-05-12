@@ -12,7 +12,7 @@ import styled from "styled-components";
 import CachedIcon from '@mui/icons-material/Cached';
 
 const MapListSelection = styled.div`
-  flex: 1;
+  position: relative;
   display: flex;
   flex-direction: row;
   margin: 4rem 6rem;
@@ -89,7 +89,7 @@ const MapPathItem = styled.div`
 `
 const MapListSectionContent = styled.div`
   overflow: auto;
-  height: 40rem; // TODO: DEFINE this better
+  // height: 40rem; // TODO: DEFINE this better
 `
 const SectionButton = styled.button`
   background: #FFFFFF;
@@ -161,8 +161,8 @@ const NavigationMode = () => {
             <SectionTitle>Trayectoria activa</SectionTitle>
 
             {
-              pathsConfig.map(path =>
-                <MapPathItem>
+              pathsConfig.map((path, index) =>
+                <MapPathItem key={index}>
                   <h3>{path.name}</h3>
                   <span>{path.pathName}</span>
                   <button><CachedIcon sx={{color: '#FFF', fontSize: 30}} /></button>
@@ -177,8 +177,8 @@ const NavigationMode = () => {
             <SectionTitle>MApas definidos</SectionTitle>
             <MapListSectionContent>
               {
-                mapsConfig.map(map =>
-                  <MapListItem>
+                mapsConfig.map((map, index )=>
+                  <MapListItem key={index}>
                     <h3>{map.name}</h3>
                     <span>{map.paths.length} Trayectorias</span>
                   </MapListItem>)
