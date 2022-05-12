@@ -1,36 +1,10 @@
 import { Close } from '@mui/icons-material';
 import { Drawer } from '@mui/material';
 import React from 'react';
-import styled from 'styled-components';
 import Alert from '../components/Alert.js';
+import { CloseDrawerButton } from '../components/CloseDrawerButton.js';
+import { DrawerContent } from '../components/DrawerContent.js';
 import MainContainer from '../components/MainContainer.js';
-
-const CloseDrawerButton = styled.div`
-  display: flex;
-  cursor: pointer;
-  width: 3rem;
-  height: 3rem;
-  align-items: center;
-  justify-content: center;
-  align-self: flex-end;
-
-  &:hover {
-    background-color: #2f2f2f;
-  }
-`;
-
-const NotificationsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 25rem;
-  padding: 0.5rem 1rem;
-
-  h1 {
-    font-size: 1.8rem;
-    color: #2AA4D5;
-    margin: 0 0 1rem;
-  }
-`;
 
 const notifications = [{
   dateTime: '10:11',
@@ -43,7 +17,7 @@ const notifications = [{
   message: 'Robot, No presionaron botón de pedido recibido'
 }];
 
-const DrawerMenu = () => {
+const AlertsMenu = () => {
   return (
     <MainContainer>
       <Drawer
@@ -51,7 +25,7 @@ const DrawerMenu = () => {
         open={true}
         onClose={() => console.log('cerrar Menu')}
       >
-        <NotificationsContainer>
+        <DrawerContent>
           <CloseDrawerButton>
             <Close sx={{color: '#FFFFFF', fontSize: 50}}/>
           </CloseDrawerButton>
@@ -61,10 +35,10 @@ const DrawerMenu = () => {
               return <Alert {...notification} />;
             })
           }
-        </NotificationsContainer>
+        </DrawerContent>
       </Drawer>
     </MainContainer>
   );
 };
 
-export default DrawerMenu;
+export default AlertsMenu;
