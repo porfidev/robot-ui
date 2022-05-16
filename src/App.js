@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { AddTextToSpeechAlert } from './views/AddTextToSpeechAlert.jsx';
 import Alerted from './views/Alerted.jsx';
 import AlertsMenu from './views/AlertsMenu.jsx';
 import HomeView from './views/Home.jsx';
@@ -26,6 +27,7 @@ function App() {
           <Route path="/drawer" element={<AlertsMenu />} />
           <Route path="/navigation" element={<NavigationMode />} />
           <Route path="/text-to-speach" element={<TextToSpeeach />} />
+          <Route path="/add-text-to-speach" element={<AddTextToSpeechAlert />} />
         </Routes>
       </div>
     </ThemeProvider>

@@ -23,6 +23,9 @@ const HomeView = () => {
         <li>
           <Link to="/text-to-speach">Text to Speach</Link>
         </li>
+        <li>
+          <Link to="/add-text-to-speach">Add text to Speach</Link>
+        </li>
       </ul>
     </div>
   );

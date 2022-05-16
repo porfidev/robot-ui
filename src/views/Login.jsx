@@ -1,6 +1,7 @@
 import { Button, TextField } from '@mui/material';
 import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
+import { ActionButton } from '../components/ActionButton.js';
 import LogoOctopy from '../components/LogoOctopy.js';
 import MainContainer from '../components/MainContainer.js';
 
@@ -13,17 +14,6 @@ const FormContainer = styled.div`
   flex-direction: column;
   align-items: center;
   flex: 1;
-`;
-
-const FormButton = styled.button`
-  background: #FFFFFF;
-  border: 2px solid #000000;
-  font-size: 1.2rem;
-  text-transform: uppercase;
-  font-weight: bold;
-  padding: 0.8rem 2rem;
-  border-radius: 0.5rem;
-  color: #000;
 `;
 
 const LoginView = () => {
@@ -73,7 +63,7 @@ const LoginView = () => {
               rules={{required: 'Se requiere la contraseña'}}
             />
 
-            <FormButton>Comenzar</FormButton>
+            <ActionButton>Comenzar</ActionButton>
           </form>
         </FormContainer>
       </MainContent>
