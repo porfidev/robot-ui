@@ -15,6 +15,7 @@ const RobotQuickActionsContainer = styled.div`
   justify-content: center;
   align-items: center;
   overflow-x: hidden;
+  z-index: 10;
 `;
 
 export { RobotQuickActionsContainer };

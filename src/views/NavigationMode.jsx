@@ -95,6 +95,7 @@ const SectionButton = styled.button`
   background: #FFFFFF;
   box-shadow: 0 3px 3px #0000001A;
   border: 2px solid #000000;
+  color: #000000;
   opacity: 1;
   padding: 0.5rem 1rem;
   font-size: 1.5rem;
@@ -136,7 +137,6 @@ const pathsConfig = [
 const NavigationMode = () => {
   return (
     <MainContainer>
-      <LogoOctopy />
 
       <ShutDownButton>
         <PowerSettingsNewIcon sx={{ fontSize: 60 }} />

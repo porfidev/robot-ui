@@ -47,7 +47,7 @@ const AlertContent = styled.div`
   padding: 0.5rem 1rem;
 `;
 
-const Alert = ({dateTime, message}) => {
+const NotificationAlert = ({dateTime, message}) => {
   return (
     <AlertContainer>
       <AlertHead>
@@ -63,4 +63,4 @@ const Alert = ({dateTime, message}) => {
   );
 };
 
-export default Alert;
+export default NotificationAlert;

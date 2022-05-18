@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const HomeView = () => {
+const Index = () => {
   return (
     <div>
       <ul>
@@ -34,4 +34,4 @@ const HomeView = () => {
   );
 };
 
-export default HomeView;
+export default Index;

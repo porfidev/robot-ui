@@ -1,7 +1,7 @@
 import { Close } from '@mui/icons-material';
 import { Drawer } from '@mui/material';
 import React from 'react';
-import Alert from '../components/Alert.js';
+import NotificationAlert from '../components/NotificationAlert.js';
 import { CloseDrawerButton } from '../components/CloseDrawerButton.js';
 import { DrawerContent } from '../components/DrawerContent.js';
 import MainContainer from '../components/MainContainer.js';
@@ -32,7 +32,7 @@ const AlertsMenu = () => {
           <h1>Alertas</h1>
           {
             notifications.map((notification) => {
-              return <Alert {...notification} />;
+              return <NotificationAlert {...notification} />;
             })
           }
         </DrawerContent>

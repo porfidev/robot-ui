@@ -1,11 +1,10 @@
 import styled from 'styled-components';
 
 const MainContent = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
-  flex: 1;
   justify-content: center;
-  margin-top: 4rem;
 `;
 
 export { MainContent }

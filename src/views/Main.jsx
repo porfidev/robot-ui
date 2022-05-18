@@ -24,7 +24,6 @@ const MainMenuContainer = styled.div`
 const Main = () => {
   return (
     <MainContainer>
-      <LogoOctopy />
 
       <ShutDownButton>
         <PowerSettingsNewIcon sx={{ fontSize: 60 }} />

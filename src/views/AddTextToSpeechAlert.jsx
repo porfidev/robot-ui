@@ -1,8 +1,10 @@
-import { Close } from "@mui/icons-material";
-import React from "react";
+import React, { useCallback } from 'react';
 import { ActionButton } from '../components/ActionButton.js';
+import { FormContainer } from '../components/forms/FormContainer.js';
+import { InputText } from '../components/forms/InputText.js';
 import MainContainer from "../components/MainContainer.js";
 import styled from "styled-components";
+import { PromptAlert, PromptAlertText } from '../components/PromptAlert.js';
 
 const PatternBack = styled.div`
   width: 100%;
@@ -16,63 +18,35 @@ const PatternBack = styled.div`
     linear-gradient(45deg, #444cf7 25%, #e5e5f7 25%) 0px 0/ 20px 20px;
 `;
 
-const AlertContainer = styled.div`
-  backdrop-filter: blur(2px);
-  position: absolute;
-  background-color: rgba(0, 0, 0, 0.5);
-  width: 100vw;
-  height: 90vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Alert = styled.div`
-  display: flex;
-  background-color: #000000;
-  width: 40rem;
-  min-height: 10rem;
-  color: #fff;
-  padding: 1.2rem;
-  border-radius: 1.6rem;
-  flex-direction: column;
-
-  p {
-    font-size: 2rem;
-  }
-`;
-
-const CloseAlertButton = styled.div`
-  display: flex;
-  cursor: pointer;
-  width: 3rem;
-  height: 3rem;
-  align-items: center;
-  justify-content: center;
-  align-self: flex-end;
-
-  &:hover {
-    background-color: #2f2f2f;
-  }
-`;
-
+const HorizontalButtons = styled.div`
+display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+`
 const AddTextToSpeechAlert = () => {
+
+  const handleSubmit = useCallback(() => {
+    console.log('Call API REQUEST');
+  }, []);
+
   return (
     <MainContainer>
       <PatternBack />
-      <AlertContainer>
-        <Alert>
-          <CloseAlertButton>
-            <Close sx={{ color: "#FFFFFF", fontSize: 50 }} />
-          </CloseAlertButton>
-          <p>
+      <PromptAlert showCloseButton={false}>
+        <PromptAlertText>
             Agregar intención Text to speech
-          </p>
-          <input />
-          <ActionButton>Cancelar</ActionButton>
-          <ActionButton>Guardar</ActionButton>
-        </Alert>
-      </AlertContainer>
+        </PromptAlertText>
+
+        <FormContainer>
+          <form onSubmit={handleSubmit}>
+            <InputText label={'Escribe el texto a reproducir'} />
+            <HorizontalButtons>
+              <ActionButton>Cancelar</ActionButton>
+              <ActionButton>Continuar</ActionButton>
+            </HorizontalButtons>
+          </form>
+        </FormContainer>
+      </PromptAlert>
     </MainContainer>
   );
 };
