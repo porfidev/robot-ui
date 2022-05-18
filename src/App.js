@@ -6,6 +6,7 @@ import AlertsMenu from './views/AlertsMenu.jsx';
 import HomeView from './views/Home.jsx';
 import LoginView from './views/Login.jsx';
 import Main from './views/Main.jsx';
+import NavigationControl from './views/NavigationControl.jsx';
 import NavigationMode from './views/NavigationMode.jsx';
 import TextToSpeeach from './views/TextToSpeeach.jsx';
 
@@ -28,6 +29,7 @@ function App() {
           <Route path="/navigation" element={<NavigationMode />} />
           <Route path="/text-to-speach" element={<TextToSpeeach />} />
           <Route path="/add-text-to-speach" element={<AddTextToSpeechAlert />} />
+          <Route path="/navigation-control" element={<NavigationControl />} />
         </Routes>
       </div>
     </ThemeProvider>
