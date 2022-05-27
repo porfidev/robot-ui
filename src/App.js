@@ -1,11 +1,13 @@
 import { Routes, Route } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { io } from 'socket.io-client';
 import { AddTextToSpeechAlert } from './views/AddTextToSpeechAlert.jsx';
 import Alerted from './views/Alerted.jsx';
 import AlertsMenu from './views/AlertsMenu.jsx';
 import Index from './views/Index.jsx';
 import LoginView from './views/Login.jsx';
 import Main from './views/Main.jsx';
+import ManualNavigation from './views/ManualNavigation.jsx';
 import NavigationControl from './views/NavigationControl.jsx';
 import NavigationMode from './views/NavigationMode.jsx';
 import TextToSpeeach from './views/TextToSpeeach.jsx';
@@ -15,6 +17,16 @@ const darkTheme = createTheme({
     mode: 'dark'
   }
 });
+
+
+const serverUrl = process.env.REACT_APP_SOCKET_BASE_URL;
+
+const socket = io(serverUrl, {
+  extraHeaders: {
+    'Bypass-Tunnel-Reminder': 'Octopy'
+  }
+});
+
 
 function App() {
   return (
@@ -30,6 +42,7 @@ function App() {
           <Route path="/text-to-speach" element={<TextToSpeeach />} />
           <Route path="/add-text-to-speach" element={<AddTextToSpeechAlert />} />
           <Route path="/navigation-control" element={<NavigationControl />} />
+          <Route path="/manual-navigation" element={<ManualNavigation socket={socket}/>} />
         </Routes>
       </div>
     </ThemeProvider>

@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Circle, Group, Image, Layer, Rect, Stage, Text } from 'react-konva';
-import Konva from 'konva';
+import { Circle, Group, Image, Layer, Stage } from 'react-konva';
 import { useWindowSize } from 'react-use';
 import useImage from 'use-image';
 
@@ -19,13 +18,16 @@ const NavigationControl = () => {
   const yAxisControl = useRef();
   const xAxisControl = useRef();
 
+  const xAxisOriginalPosition = {x: width * 0.20 - (200 / 2), y: height * 0.96 - (200 / 2)};
+  const yAxisOriginalPositon = {x: width * 0.96 - (200 / 2), y: height * 0.96 - (200 / 2)};
+
   const handleDrag = (event) => {
     console.log('dragging');
     // setState({...state, x: event.evt.x, y: 200});
   };
 
   const limitPosition = (positionAxis, original) => {
-    console.log('OP', positionAxis, original)
+    console.log('OP', positionAxis, original);
     if (positionAxis < original - 50) {
       return original - 50;
     }
@@ -39,25 +41,69 @@ const NavigationControl = () => {
 
   const dragBoundFuncXHandler = position => {
     return {
-      x: limitPosition(position.x, width * 0.20 - (200 / 2)),
+      x: limitPosition(position.x, xAxisOriginalPosition.x),
       y: xAxisControl.current.absolutePosition().y
     };
   };
 
   const dragBoundFuncYHandler = position => {
-    console.log('pis', position);
     return {
       x: yAxisControl.current.absolutePosition().x,
-      y: limitPosition(position.y, height * 0.96 - (200 / 2)),
+      y: limitPosition(position.y, height * 0.96 - (200 / 2))
     };
   };
 
   const dragEndHandler = () => {
     // setState({...state, x: 50, y: 50});
-
-    xAxisControl.current.position({x: width * 0.20 - (200 / 2), y: height * 0.96 - (200 / 2)});
-    yAxisControl.current.position({x: width * 0.96 - (200 / 2), y: height * 0.96 - (200 / 2)});
+    console.log('dragend');
+    xAxisControl.current.position({x: xAxisOriginalPosition.x, y: xAxisOriginalPosition.y});
+    yAxisControl.current.position({x: yAxisOriginalPositon.x, y: yAxisOriginalPositon.y});
   };
+
+
+  // CONSTOL FUNCITON
+
+  const [isMovingY, setIsMovingY] = useState(false);
+
+
+
+
+  useEffect(() => {
+    let testInterval = null;
+    if(isMovingY === true) {
+      testInterval = setInterval(() => {
+        console.log('Me sigo moviendo tio');
+      }, 100);
+    } else {
+      clearInterval(testInterval);
+    }
+
+    return () => {
+      clearInterval(testInterval)
+    }
+  }, [isMovingY]);
+
+
+
+
+  const onDragYAxis = (event) => {
+    console.log('drag Y', event);
+    setIsMovingY(true);
+  }
+
+  const onDragEndYAxis = (event) => {
+    console.log('end Drag Y', event);
+    setIsMovingY(false);
+    yAxisControl.current.position({x: yAxisOriginalPositon.x, y: yAxisOriginalPositon.y});
+  };
+
+  const onTouchStar = () => {
+    console.log('dedo sobre');
+  }
+
+  const onTouchEnd = () => {
+    console.log('dejo de presionar');
+  }
 
   return (
     <div>
@@ -75,12 +121,12 @@ const NavigationControl = () => {
             <Circle width={150} height={150}
                     fill="rgba(0,0,0,0.5)"
                     stroke="rgba(0,0,0,0.7)"
-                    x={width * 0.20 - (200 / 2)}
-                    y={height * 0.96 - (200 / 2)}/>
+                    x={xAxisOriginalPosition.x}
+                    y={xAxisOriginalPosition.y}/>
             <Circle width={90} height={90}
                     fill="green"
-                    x={width * 0.20 - (200 / 2)}
-                    y={height * 0.96 - (200 / 2)}
+                    x={xAxisOriginalPosition.x}
+                    y={xAxisOriginalPosition.y}
                     draggable={true}
                     onDragMove={handleDrag}
                     dragBoundFunc={dragBoundFuncXHandler}
@@ -92,16 +138,18 @@ const NavigationControl = () => {
             <Circle width={150} height={150}
                     fill="rgba(0,0,0,0.5)"
                     stroke="rgba(0,0,0,0.7)"
-                    x={width * 0.96 - (200 / 2)}
-                    y={height * 0.96 - (200 / 2)}/>
+                    x={yAxisOriginalPositon.x}
+                    y={yAxisOriginalPositon.y}/>
             <Circle width={90} height={90}
                     fill="green"
-                    x={width * 0.96 - (200 / 2)}
-                    y={height * 0.96 - (200 / 2)}
+                    x={yAxisOriginalPositon.x}
+                    y={yAxisOriginalPositon.y}
                     draggable={true}
-                    onDragMove={handleDrag}
+                    onDragMove={onDragYAxis}
                     dragBoundFunc={dragBoundFuncYHandler}
-                    onDragEnd={dragEndHandler}
+                    onDragEnd={onDragEndYAxis}
+                    onTouchMove={onTouchStar}
+                    onTouchEnd={onTouchEnd}
                     ref={yAxisControl}/>
           </Group>
         </Layer>

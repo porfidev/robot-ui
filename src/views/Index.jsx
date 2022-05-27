@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 const Index = () => {
   return (
     <div>
+      <h1>Demo Components</h1>
       <ul>
         <li>
           <Link to="/login">Login</Link>
@@ -28,6 +29,13 @@ const Index = () => {
         </li>
         <li>
           <Link to="/navigation-control">Navigation Control</Link>
+        </li>
+      </ul>
+
+      <h1>Mock Integration</h1>
+      <ul>
+        <li>
+          <Link to="/manual-navigation">Manual Navigation</Link>
         </li>
       </ul>
     </div>
