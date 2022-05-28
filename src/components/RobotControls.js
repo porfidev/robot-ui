@@ -1,25 +1,45 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { Circle, Group, Image, Layer, Stage } from 'react-konva';
 import { useWindowSize } from 'react-use';
-import useImage from 'use-image';
+import styled from 'styled-components';
 
-const NavigationControl = () => {
-  const url = 'https://i.pravatar.cc/300';
+const RobotControlsContainer = styled.div`
+  position: absolute;
+  z-index: 2;
+  bottom: 0;
+  left: 0;
+`;
+
+const RobotControls = ({socket}) => {
   const {width, height} = useWindowSize();
-  const [urlImage, setUrlImage] = useState('https://i.pravatar.cc/300');
-  const [image, status] = useImage(urlImage);
-  const [state, setState] = useState({
-    x: 50,
-    y: 50,
-    isDragging: false,
-    id: null
-  });
-
   const yAxisControl = useRef();
   const xAxisControl = useRef();
+  const LimitMovementThreshold = 60;
 
-  const xAxisOriginalPosition = {x: width * 0.20 - (200 / 2), y: height * 0.96 - (200 / 2)};
+  const xAxisOriginalPosition = {x: width * 0.26 - (200 / 2), y: height * 0.96 - (200 / 2)};
   const yAxisOriginalPositon = {x: width * 0.96 - (200 / 2), y: height * 0.96 - (200 / 2)};
+
+  const goAhead = (movement) => {
+    socket.emit('Move', {
+      "linear_x": movement,
+      "angular_z": 0
+    });
+  };
+
+  const stop = () => {
+    socket.emit('Move', {
+      "linear_x": 0,
+      "angular_z": 0
+    });
+  }
+
+  const goBackward = () => {
+    socket.emit('Move', {
+      "linear_x": -0.3,
+      "angular_z": 0
+    });
+  };
 
   const handleDrag = (event) => {
     console.log('dragging');
@@ -27,13 +47,12 @@ const NavigationControl = () => {
   };
 
   const limitPosition = (positionAxis, original) => {
-    console.log('OP', positionAxis, original);
-    if (positionAxis < original - 50) {
-      return original - 50;
+    if (positionAxis < original - LimitMovementThreshold) {
+      return original - LimitMovementThreshold;
     }
 
-    if (positionAxis > original + 50) {
-      return original + 50;
+    if (positionAxis > original + LimitMovementThreshold) {
+      return original + LimitMovementThreshold;
     }
 
     return positionAxis;
@@ -49,7 +68,7 @@ const NavigationControl = () => {
   const dragBoundFuncYHandler = position => {
     return {
       x: yAxisControl.current.absolutePosition().x,
-      y: limitPosition(position.y, height * 0.96 - (200 / 2))
+      y: limitPosition(position.y, yAxisOriginalPositon.y)
     };
   };
 
@@ -60,56 +79,69 @@ const NavigationControl = () => {
     yAxisControl.current.position({x: yAxisOriginalPositon.x, y: yAxisOriginalPositon.y});
   };
 
-
   // CONSTOL FUNCITON
 
   const [isMovingY, setIsMovingY] = useState(false);
 
+  const evaluateYAxisMovement = (yPosition) => {
+    const evalPosition = yAxisOriginalPositon.y - yPosition;
+
+    console.log('EVAL PO', evalPosition);
+    if(evalPosition === 0) {
+      return 0;
+    }
+
+    if(evalPosition > 0) {
+      if(evalPosition > 40)
+        return 0.3;
+      if(evalPosition > 20)
+        return 0.2
+      return 0.1
+    }
+
+    if(evalPosition < 0) {
+      if(evalPosition < -40)
+        return -0.3;
+      if(evalPosition < -20)
+        return -0.2;
+      return -0.1
+    }
+
+    return 0;
+  };
+
   useEffect(() => {
     let testInterval = null;
-    if(isMovingY === true) {
+    if (isMovingY === true) {
       testInterval = setInterval(() => {
-        console.log('Me sigo moviendo tio');
-      }, 100);
+        console.log('current Y postion', yAxisControl.current.y());
+        console.log('Movement', evaluateYAxisMovement(yAxisControl.current.y()));
+        goAhead(evaluateYAxisMovement(yAxisControl.current.y()));
+      }, 300);
     } else {
       clearInterval(testInterval);
     }
 
     return () => {
-      clearInterval(testInterval)
-    }
+      clearInterval(testInterval);
+    };
   }, [isMovingY]);
 
   const onDragYAxis = (event) => {
-    console.log('drag Y', event);
+    console.log('drag Y', yAxisControl.current.y());
     setIsMovingY(true);
-  }
-
-  const onDragEndYAxis = (event) => {
-    console.log('end Drag Y', event);
-    setIsMovingY(false);
-    yAxisControl.current.position({x: yAxisOriginalPositon.x, y: yAxisOriginalPositon.y});
   };
 
-  const onTouchStar = () => {
-    console.log('dedo sobre');
-  }
-
-  const onTouchEnd = () => {
-    console.log('dejo de presionar');
-  }
+  const onDragEndYAxis = (event) => {
+    setIsMovingY(false);
+    yAxisControl.current.position({x: yAxisOriginalPositon.x, y: yAxisOriginalPositon.y});
+    stop();
+    console.log('on End Drag Y', yAxisControl.current.y());
+  };
 
   return (
-    <div>
-      {/*<h3>Navigation Control</h3>*/}
-      {/*<pre>{urlImage}</pre>*/}
-      {/*<pre>{status}</pre>*/}
-      {/*<pre>{width} -  {height}</pre>*/}
-      {/*<pre>{JSON.stringify(state)}</pre>*/}
+    <RobotControlsContainer>
       <Stage width={width} height={height}>
-        <Layer>
-          <Image fill="red" width={width} height={width - 50} image={image}/>
-        </Layer>
         <Layer>
           <Group name="xAxisControlGroup">
             <Circle width={150} height={150}
@@ -142,14 +174,12 @@ const NavigationControl = () => {
                     onDragMove={onDragYAxis}
                     dragBoundFunc={dragBoundFuncYHandler}
                     onDragEnd={onDragEndYAxis}
-                    onTouchMove={onTouchStar}
-                    onTouchEnd={onTouchEnd}
                     ref={yAxisControl}/>
           </Group>
         </Layer>
       </Stage>
-    </div>
+    </RobotControlsContainer>
   );
 };
 
-export default NavigationControl;
+export default RobotControls;

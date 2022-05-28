@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
-import { ApiContext } from '../../contexts/apiContext.js';
-import { EVENT_MODES } from '../../enums/eventModes.js';
+import { ApiContext } from '../contexts/apiContext.js';
+import { EVENT_MODES } from '../enums/eventModes.js';
 
 const initialBatteryStatus = {
   isCharging: false,
