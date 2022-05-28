@@ -2,6 +2,8 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useWindowSize } from 'react-use';
 import styled from 'styled-components';
+import BatteryLifeMeter from '../components/forms/BatteryLifeMeter.js';
+import { EVENT_MODES } from '../enums/eventModes.js';
 
 const serverUrl = process.env.REACT_APP_SOCKET_BASE_URL;
 
@@ -10,12 +12,6 @@ const NavigationContainer = styled.div`
   height: ${props => props.height}px;
   background-color: rebeccapurple;
 `;
-
-const EVENT_MODES = {
-  STOP: 'stop',
-  EVENT: 'event',
-  UNIQUE: 'unique'
-};
 
 const ManualNavigation = ({socket}) => {
   const {width, height} = useWindowSize();
@@ -48,21 +44,21 @@ const ManualNavigation = ({socket}) => {
     });
   };
 
-  useEffect(() => {
-    socket.emit('Connected', {
-      'type': 'navigation'
-    }, (answer) => {
-      console.log('SOCKET ANSWER', answer);
-    });
-
-    socket.on('Camera', CameraListener);
-    socket.on('Battery', BatteryListener);
-
-    return () => {
-      socket.off('Battery', BatteryListener);
-      socket.off('Camera', CameraListener);
-    };
-  }, [socket]);
+  // useEffect(() => {
+  //   socket.emit('Connected', {
+  //     'type': 'navigation'
+  //   }, (answer) => {
+  //     console.log('SOCKET ANSWER', answer);
+  //   });
+  //
+  //   socket.on('Camera', CameraListener);
+  //   socket.on('Battery', BatteryListener);
+  //
+  //   return () => {
+  //     socket.off('Battery', BatteryListener);
+  //     socket.off('Camera', CameraListener);
+  //   };
+  // }, [socket]);
 
   const BatteryListener = data => {
     console.log('BATTERY MESSAGE', data);
@@ -120,6 +116,7 @@ const ManualNavigation = ({socket}) => {
       <button onClick={goBackward}>Ir Atras</button>
       <button onClick={goLeft}>Izquierda</button>
       <button onClick={goRight}>Derecha</button>
+      <BatteryLifeMeter />
       { cameraImage && <img alt="imageView" src={cameraImage} width={width} height={height}/> }
     </NavigationContainer>
   );

@@ -1,6 +1,7 @@
-import { Routes, Route } from 'react-router-dom';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Route, Routes } from 'react-router-dom';
 import { io } from 'socket.io-client';
+import { ApiContext } from './contexts/apiContext.js';
 import { AddTextToSpeechAlert } from './views/AddTextToSpeechAlert.jsx';
 import Alerted from './views/Alerted.jsx';
 import AlertsMenu from './views/AlertsMenu.jsx';
@@ -18,33 +19,33 @@ const darkTheme = createTheme({
   }
 });
 
+const robotUrl = process.env.REACT_APP_SOCKET_BASE_URL;
 
-const serverUrl = process.env.REACT_APP_SOCKET_BASE_URL;
-
-const socket = io(serverUrl, {
+const socket = io(robotUrl, {
   extraHeaders: {
     'Bypass-Tunnel-Reminder': 'Octopy'
   }
 });
 
-
 function App() {
   return (
     <ThemeProvider theme={darkTheme}>
-      <div className="App">
-        <Routes>
-          <Route path="/" element={<Index/>}/>
-          <Route path="/login" element={<LoginView/>}/>
-          <Route path="/alerted" element={<Alerted />} />
-          <Route path="/main" element={<Main />} />
-          <Route path="/drawer" element={<AlertsMenu />} />
-          <Route path="/navigation" element={<NavigationMode />} />
-          <Route path="/text-to-speach" element={<TextToSpeeach />} />
-          <Route path="/add-text-to-speach" element={<AddTextToSpeechAlert />} />
-          <Route path="/navigation-control" element={<NavigationControl />} />
-          <Route path="/manual-navigation" element={<ManualNavigation socket={socket}/>} />
-        </Routes>
-      </div>
+      <ApiContext.Provider value={{robotUrl: robotUrl}}>
+        <div className="App">
+          <Routes>
+            <Route path="/" element={<Index/>}/>
+            <Route path="/login" element={<LoginView/>}/>
+            <Route path="/alerted" element={<Alerted/>}/>
+            <Route path="/main" element={<Main/>}/>
+            <Route path="/drawer" element={<AlertsMenu/>}/>
+            <Route path="/navigation" element={<NavigationMode/>}/>
+            <Route path="/text-to-speach" element={<TextToSpeeach/>}/>
+            <Route path="/add-text-to-speach" element={<AddTextToSpeechAlert/>}/>
+            <Route path="/navigation-control" element={<NavigationControl/>}/>
+            <Route path="/manual-navigation" element={<ManualNavigation socket={socket}/>}/>
+          </Routes>
+        </div>
+      </ApiContext.Provider>
     </ThemeProvider>
   );
 }
