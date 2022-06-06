@@ -8,13 +8,6 @@ const NavigationControl = () => {
   const {width, height} = useWindowSize();
   const [urlImage, setUrlImage] = useState('https://i.pravatar.cc/300');
   const [image, status] = useImage(urlImage);
-  const [state, setState] = useState({
-    x: 50,
-    y: 50,
-    isDragging: false,
-    id: null
-  });
-
   const yAxisControl = useRef();
   const xAxisControl = useRef();
 

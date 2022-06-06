@@ -28,8 +28,6 @@ const RobotControls = ({socket}) => {
     let testInterval = null;
     if (isMovingY === true) {
       testInterval = setInterval(() => {
-        console.log('current Y postion', yAxisControl.current.y());
-        console.log('Movement', evaluateYAxisMovement(yAxisOriginalPositon.y, yAxisControl.current.y()));
         moveLinearX(evaluateYAxisMovement(yAxisOriginalPositon.y, yAxisControl.current.y()));
       }, 300);
     } else {
@@ -45,8 +43,6 @@ const RobotControls = ({socket}) => {
     let testInterval = null;
     if (isMovingX === true) {
       testInterval = setInterval(() => {
-        console.log('current X postion', xAxisControl.current.x());
-        console.log('Movement', evaluateYAxisMovement(xAxisOriginalPosition.x, xAxisControl.current.x()));
         moveAngularZ(evaluateYAxisMovement(xAxisOriginalPosition.x, xAxisControl.current.x()));
       }, 300);
     } else {
