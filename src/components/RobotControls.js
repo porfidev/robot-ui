@@ -126,12 +126,12 @@ const RobotControls = ({socket}) => {
   };
 
   const onDragYAxis = (event) => {
-    console.log('drag Y', yAxisControl.current.y());
+    // console.log('drag Y', yAxisControl.current.y());
     setIsMovingY(true);
   };
 
   const onDragXAxis = (event) => {
-    console.log('drag X', xAxisControl.current.x());
+    // console.log('drag X', xAxisControl.current.x());
     setIsMovingX(true);
   };
 
@@ -139,14 +139,14 @@ const RobotControls = ({socket}) => {
     setIsMovingY(false);
     yAxisControl.current.position({x: yAxisOriginalPositon.x, y: yAxisOriginalPositon.y});
     stop();
-    console.log('on End Drag Y', yAxisControl.current.y());
+    // console.log('on End Drag Y', yAxisControl.current.y());
   };
 
   const onDragEndXAxis = (event) => {
     setIsMovingX(false);
     xAxisControl.current.position({x: xAxisOriginalPosition.x, y: xAxisOriginalPosition.y});
     stop();
-    console.log('on End Drag x', xAxisControl.current.x());
+    // console.log('on End Drag x', xAxisControl.current.x());
   };
 
   return (

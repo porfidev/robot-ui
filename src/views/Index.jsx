@@ -37,6 +37,9 @@ const Index = () => {
         <li>
           <Link to="/manual-navigation">Manual Navigation</Link>
         </li>
+        <li>
+          <Link to="/map-navigation">Map Navigation</Link>
+        </li>
       </ul>
     </div>
   );

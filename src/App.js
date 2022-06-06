@@ -9,6 +9,7 @@ import Index from './views/Index.jsx';
 import LoginView from './views/Login.jsx';
 import Main from './views/Main.jsx';
 import ManualNavigation from './views/ManualNavigation.jsx';
+import MapNavigation from './views/MapNavigation.jsx';
 import NavigationControl from './views/NavigationControl.jsx';
 import NavigationMode from './views/NavigationMode.jsx';
 import TextToSpeeach from './views/TextToSpeeach.jsx';
@@ -43,6 +44,7 @@ function App() {
             <Route path="/add-text-to-speach" element={<AddTextToSpeechAlert/>}/>
             <Route path="/navigation-control" element={<NavigationControl/>}/>
             <Route path="/manual-navigation" element={<ManualNavigation socket={socket}/>}/>
+            <Route path="/map-navigation" element={<MapNavigation socket={socket}/>}/>
           </Routes>
         </div>
       </ApiContext.Provider>
