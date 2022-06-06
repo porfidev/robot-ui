@@ -4,16 +4,16 @@ import { ApiContext } from '../../contexts/apiContext.js';
 import { EVENT_MODES } from '../../enums/eventModes.js';
 import styled from 'styled-components';
 
-const normal100 = require('./assets/Normal 100%.png');
-const normal75 = require('./assets/Normal 75%.png');
-const normal50 = require('./assets/Normal 50%.png');
-const normal25 = require('./assets/Normal 25%.png');
-const normal10 = require('./assets/Normal 10%.png');
-const charging100 = require('./assets/Charging 100%.png');
-const charging75 = require('./assets/Charging 75%.png');
-const charging50 = require('./assets/Charging 50%.png');
-const charging25 = require('./assets/Charging 25%.png');
-const charging10 = require('./assets/Charging 10%.png');
+const normal100 = require('./assets/Normal_100%.png');
+const normal75 = require('./assets/Normal_75%.png');
+const normal50 = require('./assets/Normal_50%.png');
+const normal25 = require('./assets/Normal_25%.png');
+const normal10 = require('./assets/Normal_10%.png');
+const charging100 = require('./assets/Charging_100%.png');
+const charging75 = require('./assets/Charging_75%.png');
+const charging50 = require('./assets/Charging_50%.png');
+const charging25 = require('./assets/Charging_25%.png');
+const charging10 = require('./assets/Charging_10%.png');
 
 const initialBatteryStatus = {
   isCharging: false,
@@ -27,7 +27,7 @@ const BatteryContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  right: 12rem;
+  right: 6rem;
   top: 2rem;
   min-width: 12rem;
   min-height: 3rem;
