@@ -2,7 +2,7 @@ import React from 'react';
 import { useWindowSize } from 'react-use';
 import BatteryLifeMeter from '../components/BatteryLifeMeter/BatteryLifeMeter.js';
 import CameraView from '../components/CameraView.js';
-import MinimapView from '../components/MinimapView.js';
+import MinimapView from '../components/MinimapView/MinimapView.js';
 import { NavigationContainer } from '../components/NavigationContainer.js';
 import QuickActionButton from '../components/QuickActionButton.js';
 import RobotControls from '../components/RobotControls.js';
