@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
-import { Image, Layer, Stage } from 'react-konva';
+import { Circle, Image, Layer, Stage } from 'react-konva';
 import useImage from 'use-image';
 import { ApiContext } from '../../contexts/apiContext.js';
 import { EVENT_MODES } from '../../enums/eventModes.js';
@@ -90,6 +90,7 @@ const MinimapView = () => {
 
       if (payload.status === 'OK') {
         const newMinimapData = payload.data;
+        console.log('minimap data', newMinimapData);
         setMinimap(newMinimapData);
         setMinimapImage(newMinimapData.map);
       }
@@ -124,7 +125,7 @@ const MinimapView = () => {
   };
 
   const zoomIn = () => {
-    if (stage.scale >= 1.5) {
+    if (stage.scale >= 1.9) {
       return;
     }
     const newStage = {
@@ -143,9 +144,13 @@ const MinimapView = () => {
     <MinimapContainer condensed={condensed}>
       <StageContainer condensed={condensed}>
         <Stage width={condensed ? 120 : 360} height={condensed ? 120 : 240} scaleX={stage.scale} scaleY={stage.scale}
-               ref={stageRef}>
+               ref={stageRef} draggable={true}>
           <Layer>
-            <Image fill="red" image={image} width={minimap.width} height={minimap.height} draggable={true}/>
+            <Image image={image} width={minimap.width} height={minimap.height}/>
+          </Layer>
+          <Layer>
+            <Circle fill="red" stroke={'white'} width={10} height={10} x={minimap.origin[0] + minimap.width / 2}
+                    y={minimap.origin[1] + minimap.height / 2}/>
           </Layer>
         </Stage>
       </StageContainer>

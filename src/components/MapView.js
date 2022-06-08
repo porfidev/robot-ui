@@ -14,8 +14,8 @@ const MapView = ({socket}) => {
   const [mapImage, setMapImage] = useState({
     map: '',
     width: 0,
-    height: 0,
-  })
+    height: 0
+  });
   const {width, height} = useWindowSize();
   const api = useContext(ApiContext);
 
@@ -26,14 +26,15 @@ const MapView = ({socket}) => {
       'type': 'navigation'
     });
 
-    // socket.on('Map', MapListener);
     socket.on('CurrentPosition', CurrentPositionListener);
+    socket.on('Map', MapListener);
 
-    Promise.all([initLiveMap(), initLiveCurrentPosition()]);
+    initLiveMap();
+    initLiveCurrentPosition();
 
     return () => {
-      // socket.off('Map', MapListener);
-      socket.off('CurrentPosition', CurrentPositionListener)
+      socket.off('CurrentPosition', CurrentPositionListener);
+      socket.off('Map', MapListener);
       stopLiveMap();
       stopLiveCurrentPositon();
     };
@@ -42,11 +43,11 @@ const MapView = ({socket}) => {
   const MapListener = data => {
     console.log('MAP LISTENER', data);
     setMapImage(data.data.image);
-  }
+  };
 
   const CurrentPositionListener = data => {
-    console.log('POSITION LISTENER', data);
-  }
+    console.log('POSITION LISTENER OYENDO', data);
+  };
 
   const initLiveMap = async () => {
     const {robotUrl} = api;
@@ -54,10 +55,10 @@ const MapView = ({socket}) => {
       'map': 'map',
       'mode': EVENT_MODES.EVENT
     }).then(data => {
-      console.log('DATA MAP',data);
-      const { payload } = data.data;
-      setMapImage(payload.data)
-      });
+      console.log('DATA MAP', data);
+      const {payload} = data.data;
+      setMapImage(payload.data);
+    });
   };
 
   const stopLiveMap = async () => {
@@ -73,7 +74,7 @@ const MapView = ({socket}) => {
     await axios.post(`${robotUrl}ros/amcl-pose`, {
       'mode': EVENT_MODES.EVENT
     }).then(data => {
-      console.log('DATA POSITON',data);
+      console.log('DATA POSITON', data);
     });
   };
 
@@ -83,7 +84,6 @@ const MapView = ({socket}) => {
       'mode': EVENT_MODES.STOP
     });
   };
-
 
   return (
     <MapViewContainer width={width} height={height}>
