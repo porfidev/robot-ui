@@ -72,7 +72,7 @@ const MinimapView = () => {
     resolution: 0,
     origin: [0, 0, 0]
   });
-  const [minimapImage, setMinimapImage] = useState('https://i.pravatar.cc/300');
+  const [minimapImage, setMinimapImage] = useState('');
   const [image, status] = useImage(minimapImage);
   const [stage, setStage] = useState({
     scale: 1,
