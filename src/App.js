@@ -1,11 +1,14 @@
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { io } from 'socket.io-client';
+import { RequireAuth } from './components/RequireAuth.js';
 import { ApiContext } from './contexts/apiContext.js';
+import { AuthContext } from './contexts/authContext.js';
 import { AddTextToSpeechAlert } from './views/AddTextToSpeechAlert.jsx';
 import Alerted from './views/Alerted.jsx';
 import AlertsMenu from './views/AlertsMenu.jsx';
-import Index from './views/Index.jsx';
+import Demo from './views/Demo.jsx';
 import LoginView from './views/Login.jsx';
 import Main from './views/Main.jsx';
 import ManualNavigation from './views/ManualNavigation.jsx';
@@ -20,34 +23,75 @@ const darkTheme = createTheme({
   }
 });
 
-const robotUrl = process.env.REACT_APP_SOCKET_BASE_URL;
+const ApiProvider = ({children}) => {
+  const [robotUrl, setRobotUrl] = useState(process.env.REACT_APP_SOCKET_BASE_URL);
 
-const socket = io(robotUrl, {
-  extraHeaders: {
-    'Bypass-Tunnel-Reminder': 'Octopy'
-  }
-});
+  // TODO: update when change URL ROBOT
+  // Connect on demand
+  const socket = io(robotUrl, {
+    extraHeaders: {
+      'Bypass-Tunnel-Reminder': 'Octopy'
+    }
+  });
+
+  const changeRobotUrl = (url) => {
+    setRobotUrl(url);
+  };
+
+  const apiProviderValue = {robotUrl, changeRobotUrl, socket};
+  return <ApiContext.Provider value={apiProviderValue}>{children}</ApiContext.Provider>;
+};
+
+const AuthProvider = ({children}) => {
+  const [user, setUser] = useState(null);
+
+  const logIn = (userData, callback) => {
+    // FAKE AUTH
+    if (userData) {
+      setUser({
+        userName: userData.userName
+      });
+      callback();
+    }
+  };
+
+  const logOut = (callback) => {
+    setUser(null);
+    callback();
+  };
+
+  const authProviderValue = {user, logIn, logOut};
+
+  return <AuthContext.Provider value={authProviderValue}>{children}</AuthContext.Provider>;
+};
 
 function App() {
   return (
     <ThemeProvider theme={darkTheme}>
-      <ApiContext.Provider value={{robotUrl: robotUrl}}>
-        <div className="App">
-          <Routes>
-            <Route path="/" element={<Index/>}/>
-            <Route path="/login" element={<LoginView/>}/>
-            <Route path="/alerted" element={<Alerted/>}/>
-            <Route path="/main" element={<Main/>}/>
-            <Route path="/drawer" element={<AlertsMenu/>}/>
-            <Route path="/navigation" element={<NavigationMode/>}/>
-            <Route path="/text-to-speach" element={<TextToSpeeach/>}/>
-            <Route path="/add-text-to-speach" element={<AddTextToSpeechAlert/>}/>
-            <Route path="/navigation-control" element={<NavigationControl/>}/>
-            <Route path="/manual-navigation" element={<ManualNavigation socket={socket}/>}/>
-            <Route path="/map-navigation" element={<MapNavigation socket={socket}/>}/>
-          </Routes>
-        </div>
-      </ApiContext.Provider>
+      <ApiProvider>
+        <AuthProvider>
+          <div className="App">
+            <Routes>
+              <Route path="/" element={<Demo/>}/>
+              <Route path="/login" element={<LoginView/>}/>
+              <Route path="/alerted" element={<Alerted/>}/>
+              <Route path="/drawer" element={<AlertsMenu/>}/>
+              <Route path="/navigation" element={<NavigationMode/>}/>
+              <Route path="/text-to-speach" element={<TextToSpeeach/>}/>
+              <Route path="/add-text-to-speach" element={<AddTextToSpeechAlert/>}/>
+              <Route path="/navigation-control" element={<NavigationControl/>}/>
+              <Route path="/manual-navigation" element={<ManualNavigation/>}/>
+              <Route path="/map-navigation" element={<MapNavigation/>}/>
+              <Route path="/admin"
+                     element={<RequireAuth>
+                       <Route path="/main" element={<Main/>}/>
+                     </RequireAuth>}>
+
+              </Route>
+            </Routes>
+          </div>
+        </AuthProvider>
+      </ApiProvider>
     </ThemeProvider>
   );
 }

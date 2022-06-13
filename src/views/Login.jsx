@@ -1,12 +1,18 @@
+import { useContext } from 'react';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { ActionButton } from '../components/ActionButton.js';
 import { FormContainer } from '../components/forms/FormContainer.js';
 import { InputText } from '../components/forms/InputText.js';
 import MainContainer from '../components/MainContainer.js';
+import {
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
 
 import { MainContent } from '../components/MainContent.js';
 import { MainLegend } from '../components/MainLegend.js';
+import { AuthContext } from '../contexts/authContext.js';
 
 const LoginView = () => {
   const {control, handleSubmit} = useForm({
@@ -15,9 +21,18 @@ const LoginView = () => {
       password: ''
     }
   });
+  const navigate = useNavigate();
+  const auth = useContext(AuthContext);
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
 
   const onSubmit = data => {
     console.log('onSubmit', data);
+
+    auth.logIn(data, () => {
+      navigate(from, {replace: true})
+    });
   };
 
   return (

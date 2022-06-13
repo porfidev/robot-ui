@@ -1,7 +1,7 @@
-import { createContext} from 'react';
+import { createContext } from 'react';
 
 const ApiContext = createContext({
-  robotUrl: '',
+  robotUrl: ''
 });
 
 export { ApiContext };
