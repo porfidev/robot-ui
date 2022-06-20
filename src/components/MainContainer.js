@@ -1,18 +1,21 @@
 import React from "react";
 import styled from "styled-components";
 import LogoOctopy from './LogoOctopy.js';
+const background = require('../assets/main-background.jpg');
 
 const Container = styled.div`
   position: relative;
   display: flex;
-  overflow: hidden;
   flex-direction: column;
   width: 100vw;
-  height: 91vh;
+  height: 100vh;
   margin: auto;
   color: #ffffff;
-  background: rgb(77, 77, 77);
-  background: radial-gradient(circle, rgb(77, 77, 77) 0%, rgba(0, 0, 0, 1) 90%);
+  background-color: #000000;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: ${(props) => `url(${props.bgImg})`};
+  overflow: hidden;
 `;
 
 const FooterOctopy = styled.div`
@@ -28,7 +31,7 @@ const FooterOctopy = styled.div`
 
 const MainContainer = ({ children }) => {
   return (
-    <Container>
+    <Container bgImg={background}>
       <LogoOctopy />
       {children}
       <FooterOctopy>

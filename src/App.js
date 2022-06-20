@@ -16,6 +16,7 @@ import MapNavigation from './views/MapNavigation.jsx';
 import NavigationControl from './views/NavigationControl.jsx';
 import NavigationMode from './views/NavigationMode.jsx';
 import TextToSpeeach from './views/TextToSpeeach.jsx';
+import Presentation from './views/Presentation.jsx';
 
 const darkTheme = createTheme({
   palette: {
@@ -72,7 +73,7 @@ function App() {
         <AuthProvider>
           <div className="App">
             <Routes>
-              <Route path="/" element={<Demo/>}/>
+              <Route path="/" element={<Presentation/>}/>
               <Route path="/login" element={<LoginView/>}/>
               <Route path="/alerted" element={<Alerted/>}/>
               <Route path="/drawer" element={<AlertsMenu/>}/>
@@ -82,9 +83,10 @@ function App() {
               <Route path="/navigation-control" element={<NavigationControl/>}/>
               <Route path="/manual-navigation" element={<ManualNavigation/>}/>
               <Route path="/map-navigation" element={<MapNavigation/>}/>
+              <Route path="/main" element={<Main/>}/>
               <Route path="/admin"
                      element={<RequireAuth>
-                       <Route path="/main" element={<Main/>}/>
+                       <Main/>
                      </RequireAuth>}>
 
               </Route>
