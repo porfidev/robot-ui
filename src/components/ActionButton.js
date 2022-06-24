@@ -9,6 +9,11 @@ const StyledButton = styled.button`
   padding: 0.8rem 2rem;
   border-radius: 0.5rem;
   color: #000;
+  cursor: pointer;
+  
+  &:hover {
+    background-color: lightgray;
+  }
 `;
 
 const ActionButton = ({children, ...rest}) => {

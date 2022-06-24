@@ -5,16 +5,16 @@ const ActionButton = styled.div`
   flex: 1 0 20%; /* explanation below */
   margin: 1.4rem;
   height: 10rem;
-  background-color: ${({ enabled }) => enabled ? '#2aa4d5' : 'gray'};
+  background-color: ${({enabled}) => enabled ? '#2aa4d5' : 'gray'};
   border-radius: 1.2rem;
-  cursor: ${({ enabled }) => enabled ? 'pointer' : 'not-allowed'};
+  cursor: ${({enabled}) => enabled ? 'pointer' : 'not-allowed'};
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
   &:hover {
-    background-color: ${({ enabled }) => enabled ? '#36b4ec' : 'gray'};
+    background-color: ${({enabled}) => enabled ? '#36b4ec' : 'gray'};
   }
 
   span {
@@ -24,7 +24,7 @@ const ActionButton = styled.div`
     font-weight: bold;
     text-transform: uppercase;
   }
-  
+
   ${({enabled}) => enabled === false && css`
     &::after {
       content: 'desactivado';
@@ -40,10 +40,10 @@ const ActionButton = styled.div`
 
 `;
 
-const MainActionButton = ({ enabled = true, children }) => {
-  return <ActionButton enabled={enabled}>
+const MainActionButton = ({enabled = true, action = () => {}, children}) => {
+  return <ActionButton enabled={enabled} onClick={action}>
     {children}
-  </ActionButton>
-}
+  </ActionButton>;
+};
 
 export default MainActionButton;

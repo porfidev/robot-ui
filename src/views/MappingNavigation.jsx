@@ -9,7 +9,7 @@ import RobotControls from '../components/RobotControls.js';
 import { RobotQuickActionsContainer } from '../components/RobotQuickActionsContainer.js';
 import { ApiContext } from '../contexts/apiContext.js';
 
-const MapNavigation = () => {
+const MappingNavigation = () => {
   const {width, height} = useWindowSize();
   const { socket } = useContext(ApiContext);
 
@@ -27,4 +27,4 @@ const MapNavigation = () => {
   );
 };
 
-export default MapNavigation;
+export default MappingNavigation;

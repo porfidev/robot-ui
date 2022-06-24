@@ -3,14 +3,15 @@ import React from 'react';
 import styled from 'styled-components';
 
 const AlertContainer = styled.div`
-  backdrop-filter: blur(2px);
+  backdrop-filter: blur(10px);
   position: absolute;
   background-color: rgba(0, 0, 0, 0.5);
   width: 100vw;
   height: 90vh;
-  display: flex;
+  display: ${({show}) => show ? 'flex' : 'none'};
   justify-content: center;
   align-items: center;
+  z-index: 100;
 `;
 
 const Alert = styled.div`
@@ -44,9 +45,9 @@ const PromptAlertText = styled.span`
   font-size: 2rem;
 `;
 
-const PromptAlert = ({showCloseButton = true, children}) => {
+const PromptAlert = ({showCloseButton = true, children, show = false}) => {
   return (
-    <AlertContainer>
+    <AlertContainer show={show}>
       <Alert>
         {
           showCloseButton &&

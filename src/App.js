@@ -12,7 +12,7 @@ import Demo from './views/Demo.jsx';
 import LoginView from './views/Login.jsx';
 import Main from './views/Main.jsx';
 import ManualNavigation from './views/ManualNavigation.jsx';
-import MapNavigation from './views/MapNavigation.jsx';
+import MappingNavigation from './views/MappingNavigation.jsx';
 import NavigationControl from './views/NavigationControl.jsx';
 import NavigationMode from './views/NavigationMode.jsx';
 import TextToSpeeach from './views/TextToSpeeach.jsx';
@@ -82,7 +82,7 @@ function App() {
               <Route path="/add-text-to-speach" element={<AddTextToSpeechAlert/>}/>
               <Route path="/navigation-control" element={<NavigationControl/>}/>
               <Route path="/manual-navigation" element={<ManualNavigation/>}/>
-              <Route path="/map-navigation" element={<MapNavigation/>}/>
+              <Route path="/mapping-navigation" element={<MappingNavigation/>}/>
               <Route path="/main" element={<Main/>}/>
               <Route path="/admin"
                      element={<RequireAuth>

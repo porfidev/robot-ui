@@ -70,13 +70,13 @@ const MapView = ({socket}) => {
     socket.on('CurrentPosition', CurrentPositionListener);
     socket.on('Map', MapListener);
 
-    // initLiveMap();
+    initLiveMap();
     initLiveCurrentPosition();
 
     return () => {
       socket.off('CurrentPosition', CurrentPositionListener);
       socket.off('Map', MapListener);
-      // stopLiveMap();
+      stopLiveMap();
       stopLiveCurrentPositon();
     };
   }, [socket]);
